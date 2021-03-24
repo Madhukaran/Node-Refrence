@@ -2,12 +2,14 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const sql = require("mssql");
 const MSSQL_config = require("./config.json").MSSQL;
+const Routes = require("./routes")
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended : true }))
 
 app.use(bodyParser.json())
+app.use(Routes);
 
 app.get('/', (req,res) => {
     const poolPromise = new sql.ConnectionPool(MSSQL_config)
