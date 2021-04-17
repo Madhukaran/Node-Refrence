@@ -1,4 +1,4 @@
-sql
+Refer for STUFF,SUM,INNER JOIN
 ```SELECT BookingHdr.HotelId,BookingHdr.BookingId,GuestName,PaymentType,PaymentStatus,BillAmount,ConfigName as PaymentName,PaymentTo,
 BookingHdr.BookingFrom,
 STUFF ((SELECT RoomNum +',' FROM BookingDtl 
