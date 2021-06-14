@@ -1,4 +1,4 @@
-Refer for STUFF,SUM,INNER JOIN
+# Refer for STUFF,SUM,INNER JOIN
 ```SELECT BookingHdr.HotelId,BookingHdr.BookingId,GuestName,PaymentType,PaymentStatus,BillAmount,ConfigName as PaymentName,PaymentTo,
 BookingHdr.BookingFrom,
 STUFF ((SELECT RoomNum +',' FROM BookingDtl 
@@ -15,4 +15,17 @@ WHERE ConfigurationType.TypeName='Payment Type' AND ConfigurationType.TypeId=Con
 AND ConfigId=PaymentType AND BookingHdr.HotelId=15 AND CAST(BookingDate AS DATE)='2021-04-17' AND BookingStatus !='C' 
 GROUP BY BookingHdr.BookingId,BookingHdr.HotelId,GuestName,PaymentType,BillAmount,ConfigName,PaymentStatus,PaymentTo,BookingFrom 
 ORDER BY BookingHdr.BookingId
+```
+# Checking DEADLOCK and Kill Process!
+```
+SELECT sqltext.TEXT,
+req.session_id,
+req.status,
+req.command,
+req.cpu_time,
+req.total_elapsed_time
+FROM sys.dm_exec_requests req
+CROSS APPLY sys.dm_exec_sql_text(sql_handle) AS sqltext;
+
+KILL [session_id]
 ```
