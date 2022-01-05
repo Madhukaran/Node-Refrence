@@ -29,3 +29,12 @@ CROSS APPLY sys.dm_exec_sql_text(sql_handle) AS sqltext;
 
 KILL [session_id]
 ```
+
+# SPLIT and Search in table
+```
+SELECT a.*,b.FromTime,b.ToTime,b.IntervalTime,b.SlotIds,b.SlotDays FROM DoctorSlotsMapp AS a, DoctorSlotTimes AS b 
+WHERE a.DoctorSlotTimeId=b.DoctorSlotTimeId AND a.ToDate BETWEEN @fromDate AND @toDate AND a.FromDate <= @fromDate 
+AND a.DoctorId='1189' 
+AND a.HospitalId='1077'
+AND EXISTS (SELECT * FROM STRING_SPLIT(@tags, ',') WHERE value = a.SlotDay)
+```
